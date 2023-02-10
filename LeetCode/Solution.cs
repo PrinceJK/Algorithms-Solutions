@@ -102,10 +102,25 @@
 
         public string LongestPalindrome(string s)
         {
-            var result = string.Empty;
+            int length = 0, index = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                int left = i, right = i;
+                while (right < s.Length - 1 && s[left] == s[right + 1])
+                    right++;
 
-
-            return result;
+                while (right < s.Length - 1 && left > 0 && s[left - 1] == s[right + 1])
+                {
+                    left--;
+                    right++;
+                }
+                if (length < right - left + 1)
+                {
+                    length = right - left + 1;
+                    index = left;
+                }
+            }
+            return s.Substring(index, length);
         }
 
         public int Reverse(int x)
